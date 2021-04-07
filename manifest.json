@@ -1,0 +1,31 @@
+{
+	"name": "Buka Bot",
+	"version": "6.4.2",
+	"description": "Многофункциональное приложение.",
+	"permissions": ["activeTab", "declarativeContent", "storage"],
+	"update_url": "http://myurl/plugin/updates.xml",
+	"content_scripts": [ {
+		"run_at": "document_start",
+		"matches": ["*://my2.bookvoed.ru/*"],
+		"all_frames": true,
+		"js": [ "contentscript.js" ]
+   }],
+   "browser_action": {
+		"default_popup": "main.html",
+		"matches": ["*://my2.bookvoed.ru/*"],
+		"default_title": "Exten$ion",
+		"default_icon": {
+			"16": "ico/App_16.png",
+			"32": "ico/App_32.png",
+			"48": "ico/App_48.png",
+			"128": "ico/App_128.png"
+		}
+   },
+   "icons": {
+			"16": "ico/App_16.png",
+			"32": "ico/App_32.png",
+			"48": "ico/App_48.png",
+			"128": "ico/App_128.png"
+		},
+   "manifest_version": 2
+}
