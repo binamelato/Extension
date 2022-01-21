@@ -1,7 +1,7 @@
-﻿document.onreadystatechange = function(){
+document.onreadystatechange = function(){
 if(document.readyState === 'complete'){
-	var urlt = document.location.href, cult = urlt.substring(0,54), bult = urlt.substring(0,51), dult = urlt.substring(0,41), lult = urlt.substring(0,23), flt = urlt.substring(0,69), piolt = urlt.substring(0,63), wiol = urlt.substring(0,78);
-	
+	var urlt = document.location.href, cult = urlt.substring(0,54), bult = urlt.substring(0,51), dult = urlt.substring(0,41), lult = urlt.substring(0,23), flt = urlt.substring(0,69), piolt = urlt.substring(0,63), wiol = urlt.substring(0,78), himp = urlt.substring(0,62), biult = urlt.substring(0,358), biulc = urlt.substring(0,624);
+
 	if(lult == 'https://my2.bookvoed.ru'){// Добавление ссылок на реестры в шапку
 	chrome.storage.sync.get(['setnag'], function(items){
 		var maner = items.setnag;
@@ -53,30 +53,30 @@ if(document.readyState === 'complete'){
 			}else{
 			par = maner[2];
 			if(par == 1){
-		boer = document.querySelector('#content');//body
-			boer.insertAdjacentHTML("afterbegin", "<div id='ngeer'><div style='width:200px;height:70px;'><select id='pitik' style='padding:.3em .5em;font-size:14px;font-stretch:expanded;width:200px;color:#929292;border:1px solid #929292;'><option value='5' selected=''>5 сек.</option><option value='10'>10 сек.</option><option value='30'>30 сек.</option><option value='45'>45 сек.</option><option value='60'>1 мин.</option></select><input id='sufil' type='button' value='Запустить / Остановить таймер' style='width: 200px;color:#ffffff;padding:10px 5px;display:block;margin:3px 0px;border:#7609d0 solid 1px;border-radius:3px;background-color:#7609d0;cursor:pointer;box-sizing:border-box;margin-right:0px;position: absolute;text-align:center;'></div></div>");
-			buner = document.querySelector('#sufil'), cleart = document.querySelector('.cleart'), pomag = document.querySelector('#pomag'), vakol = document.querySelector('#vakol'), mikk = document.querySelector('#pitik'), binf = 0, tikk = 0;
+			boer = document.querySelector('#content');
+			boer.insertAdjacentHTML("afterbegin", "<div id='ngeer'><div style='width:200px;height:70px;'><select id='pitik' style='padding:.3em .5em;font-size:14px;font-stretch:expanded;width:200px;color:#929292;border:1px solid #929292;'><option value='timer' selected disabled>Выберите частоту обновления</option><option value='5'>5 сек.</option><option value='10'>10 сек.</option><option value='30'>30 сек.</option><option value='45'>45 сек.</option><option value='60'>1 мин.</option></select><input id='sufil' type='button' value='Запустить / Остановить таймер' style='width: 200px;color:#ffffff;padding:10px 5px;display:block;margin:3px 0px;border:#7609d0 solid 1px;border-radius:3px;background-color:#7609d0;cursor:pointer;box-sizing:border-box;margin-right:0px;position: absolute;text-align:center;'></div></div>");
+			buner = document.querySelector('#sufil'), cleart = document.querySelector('.cleart'), pomag = document.querySelector('#pomag'), vakol = document.querySelector('#vakol'), mikk = document.querySelector('#pitik'), binf = 0, tikk = 5000;
 			mikk.addEventListener("change", function(){
 				tikk = this.value*1000;
 			});
 			buner.addEventListener("click", function(){
-				console.log(tikk);
 				if(binf == 0){
 					binf = binf + 1;
 					timdu = setInterval(() => elemUpdate('div#form-table'), tikk);
 					console.log('timer vkl');
-					console.log(tikk);
+					this.style.backgroundColor ='#d00965';
 				}else{
 					binf = binf - 1;
 					clearInterval(timdu);
 					console.log('timer vikl');
+					this.style.backgroundColor ='#7609d0';
 				}
 			});
 		}
 		}
 	});		
 	}
-	if(cult == 'https://my2.bookvoed.ru/shop/logist/return?type=reject'){/* Чистка полок [Отказы] */
+	if(flt == 'https://my2.bookvoed.ru/shop/logist/send/orders/selfdelivery?type=spb'){//Подсветка старых магазиных заказов
 	chrome.storage.sync.get(['setnag'], function(items){
 		var maner = items.setnag;
 			if(maner == undefined){
@@ -84,33 +84,254 @@ if(document.readyState === 'complete'){
 			}else{
 			par = maner[3];
 			if(par == 1){
+		voxl = document.querySelectorAll('td:nth-child(4)');
+		for (var i =0, pedos=voxl.length; i< pedos; i++){// красим вчерашние заказы
+			koki = voxl[i];
+			moki = koki.innerText;
+			daday = moki.substr(0,2);
+			tData();
+			if(daday < bijan){
+				koki.setAttribute('style','background-color: #e8dd11;');
+			}
+		}
+		kokis = document.querySelectorAll('td:nth-child(3)');
+		dnische = 0;
+		for (var j =0, ert=kokis.length; j< ert; j++){
+			tata = kokis[j];
+			naki = tata.innerText;
+			if(naki == 'Да'){
+				dnische = dnische +1;
+				viok = tata.parentElement;
+				viok.setAttribute('style','background-color: #23d028;');
+			}
+		}
+			if(dnische > 0){
+				alert('В списке есть заказы с меткой Да ('+dnische+')');
+			}else{
+				alert('В списке нет заказов с меткой Да ('+dnische+')');
+			}
+		}
+		}
+	});
+	}
+	if(flt == 'https://my2.bookvoed.ru/shop/logist/send/orders/selfdelivery?type=reg'){//Подсветка старых рег заказов
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+			if(maner == undefined){
+				console.log('Настройки пустые');
+			}else{
+			par = maner[3];
+			if(par == 1){
+		voxl = document.querySelectorAll('td:nth-child(4)');
+		console.log(maner);
+		for (var i =0, pedos=voxl.length; i< pedos; i++){// красим вчерашние заказы
+			koki = voxl[i];
+			moki = koki.innerText;
+			daday = moki.substr(0,2);
+			tData();
+			console.log(daday);
+			if(daday < bijan){
+				koki.setAttribute('style','background-color: #e8dd11;');
+			}
+		}
+		kokis = document.querySelectorAll('td:nth-child(3)');
+		dnische = 0;
+		for (var j =0, ert=kokis.length; j< ert; j++){
+			tata = kokis[j];
+			naki = tata.innerText;
+			if(naki == 'Да'){
+				dnische = dnische +1;
+				viok = tata.parentElement;
+				viok.setAttribute('style','background-color: #23d028;');
+			}
+		}
+			if(dnische > 0){
+				alert('В списке есть заказы с меткой Да ('+dnische+')');
+			}else{
+				alert('В списке нет заказов с меткой Да ('+dnische+')');
+			}
+		}
+		}
+	});
+	}
+	if(himp == 'https://my2.bookvoed.ru/shop/logist/send/orders/print?sending='){
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+			if(maner == undefined){
+				console.log('Настройки пустые');
+			}else{
+			par = maner[5];
+			if(par == 1){
+		voxl = document.querySelectorAll('tr > td:nth-child(2)');
+		for (var i =0, pedos=voxl.length; i< pedos; i++){
+			koki = voxl[i];
+			koag = koki.innerText;
+			koki.innerHTML = koki.innerHTML.replace(koag, '<a href="https://my2.bookvoed.ru/shop/order?id='+koag+'">'+koag+'</a>');
+		}
+		}
+		}
+	});
+	}
+	if(cult == 'https://my2.bookvoed.ru/shop/logist/return?type=reject'){/* Чистка полок [Отказы] */
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+		if(maner == undefined){
+			console.log('Настройки пустые');
+		}else{
+			par = maner[6];
+			if(par == 1){
+		tasa=[];
 		tData();
-		var ftl = document.body.innerHTML;
-		document.body.innerHTML = document.body.innerHTML.replace('<h2>Возвраты <a href="javascript:print()">распечатать</a></h2>', '<h2>Возвраты <a href="javascript:print()">распечатать</a></h2><input type="submit" class="killkiller" value="Заполнить" style="width:100px;color: #ffffff;padding: 10px 5px;display: block;margin:7px 0px;border:#484848 solid 1px;border-radius:3px;background-color: #000000;cursor:pointer;box-sizing:border-box;text-;margin-right: 20px;position: absolute;right: 20px;"><a id="statz" style="width:90px;color:#ffffff;padding:10px 5px;display:block;margin:7px 0px;border:#7609d0 solid 1px;border-radius:3px;background-color:#7609d0;cursor:pointer;box-sizing:border-box;margin-right:0px;position: absolute;right:150px;text-align:center;">Save Stats</a>');
-		vkla = document.querySelector(".killkiller");
-		vkla.addEventListener("click", function(){
+		toma = document.getElementsByTagName('<h2>').innerText;
+			if(toma == 'Возратов нет'){
+			}else{
+				document.body.innerHTML = document.body.innerHTML.replace('<h2>Возвраты <a href="javascript:print()">распечатать</a></h2>', '<h2>Возвраты <a href="javascript:print()">распечатать</a></h2><input type="submit" class="killkiller" value="Заполнить все" style="width:100px;color: #ffffff;padding:5px 5px;display:block;margin:7px 0px;border:#484848 solid 1px;border-radius:3px;background-color: #000000;cursor:pointer;box-sizing:border-box;position:absolute;right:20px;"><input type="submit" class="butrack" value="Частично" style="width:100px;color:#000;padding:5px 5px;display: block;margin:7px 0px;border:#000 solid 1px;border-radius:3px;background-color:#fff;cursor:pointer;box-sizing:border-box;position:absolute;right:130px;"><input type="submit" class="btyk" value="Дырки" style="width:100px;color:#000;padding:5px 5px;display: block;margin:7px 0px;border:#000 solid 1px;border-radius:3px;background-color:#fff;cursor:pointer;box-sizing:border-box;position:absolute;right:240px;"><a id="deldyr" style="width:90px;color:#000;padding:5px 5px;display:block;margin:7px 0px;border:#7609d0 solid 1px;border-radius:3px;background-color:#fff;cursor:pointer;box-sizing:border-box;margin-right:0px;position: absolute;right:350px;text-align:center;">Del DyRb</a><a id="statz" style="width:90px;color:#ffffff;padding:5px 5px;display:block;margin:7px 0px;border:#7609d0 solid 1px;border-radius:3px;background-color:#7609d0;cursor:pointer;box-sizing:border-box;margin-right:0px;position: absolute;right:450px;text-align:center;">Save Stats</a>');
+		vkla = document.querySelector(".killkiller"), sais = document.querySelector(".butrack"), bytik = document.querySelector(".btyk"), dedyrb = document.querySelector("#deldyr");
+		biok=document.querySelector("#content");
+		kiok=biok.childNodes[3];
+		vkla.addEventListener("click", function(){//Для всех
 			bish = document.querySelectorAll('input[id^="form-table-table_amount_"]');
 			for (var i =0, otch4=bish.length; i< otch4; i++){
 				gog = bish[i];
-				gog.value = 1;
+				penodo = gog.parentElement.parentElement.parentElement;
+				vjsh = penodo.querySelector('td:nth-child(9)').innerHTML;
+				gog.value = vjsh;
 			}
 		});
-		var sgik = 0, stll = document.querySelector("#statz");
+		bytik.addEventListener("click", function(){//турки
+			uti = document.querySelectorAll('input[id^="form-table-table_amount_"]');
+			for (var i =0, otch4=uti.length; i< otch4; i++){
+				goi = uti[i];
+				penodi = goi.parentElement.parentElement.parentElement;
+				vjshi = penodi.querySelector('td:nth-child(4)').innerText;
+				console.log(vjshi);
+				if(vjshi != '—'){
+					penodi.remove();
+				}
+			}
+		});
+		dedyrb.addEventListener("click", function(){//удалить со страницы турки
+			puti = document.querySelectorAll('td:nth-child(4)');
+			for (var i =0, otchp=puti.length; i< otchp; i++){
+				gopo = puti[i];
+				venodi = gopo.innerText;
+				if(venodi == '—'){
+					gopo.parentElement.remove();
+				}
+			}
+		});
+		sais.addEventListener("click", function(){//Для Частичного
+			tuck = document.querySelectorAll('td:nth-child(5)');
+			for(var i =0, otchl=tuck.length; i< otchl; i++){
+				gox = tuck[i];
+				tasa.push(gox.innerText);
+			}
+			joss = tasa.filter((val, i, ar) => ar.indexOf(val) === i);
+			tgeil=Math.ceil(joss.length/15);
+			heift=16*tgeil;
+			kiok.insertAdjacentHTML("beforebegin",'<div id="pandes" style="width:1200px;margin-top:10px;height:'+heift+'px;"></div><div></div>');
+			for(var j =0, mocc=joss.length; j< mocc; j++){
+				cocc = joss[j];
+				binm = cocc;
+				gizh = document.querySelector('#pandes');
+				gizh.insertAdjacentHTML("beforeEnd", "<div style='float:left;width:80px;'><label><input type='checkbox' value='"+binm+"' class='plk_s'>  "+binm+"</label></div>"); 
+			}
+			
+			document.addEventListener("change", function(){//чекаем по чекбоксу
+			bazha = event.target;
+			coconi = bazha.getAttribute('class');
+			if(coconi == 'plk_s'){
+				if(bazha.checked){
+					ka5t = bazha.value;
+					suclk = document.querySelectorAll('td:nth-child(5)');
+						for(var i =0, tyti=suclk.length; i< tyti; i++){
+							goxl2 = suclk[i];
+							podofk = goxl2.innerText;
+							if(podofk == ka5t){
+								imisi = goxl2.parentElement;
+								bangax = imisi.querySelector('td:nth-child(9)');
+								kehj2 = bangax.innerText;
+								svigq = imisi.querySelector('td:nth-child(10)');
+								kanxz = svigq.querySelector('input[type=text]');
+								kanxz.value = kehj2;
+							}
+						}
+				}else{
+					ka6t = bazha.value;
+					sucxk = document.querySelectorAll('td:nth-child(5)');
+						for(var i =0, tyto=sucxk.length; i< tyto; i++){
+							goxl = sucxk[i];
+							podofa = goxl.innerText;
+							if(podofa == ka6t){
+								imimi = goxl.parentElement;
+								bangav = imimi.querySelector('td:nth-child(9)');
+								kehj = bangav.innerText;
+								svig = imimi.querySelector('td:nth-child(10)');
+								kanxc = svig.querySelector('input[type=text]');
+								kanxc.value = '';
+							}
+						}
+				}
+				
+			}
+			});
+			
+		});
+		
+		var sgik = 0, benam = [], stll = document.querySelector("#statz");
 		stll.addEventListener("click", function(){
-			bishd = document.querySelectorAll('input[id^="form-table-table_amount_"]');
+			bishd = document.querySelectorAll('input[id^="form-table-table_amount_"]');//подсчет товара
 			for (var i =0, otcp=bishd.length; i< otcp; i++){
 				sos = bishd[i];
 				var bisk = Number(sos.value);
 				if(bisk >= 1){
 					sgik = sgik+bisk;
+					tand = sos.parentElement.parentElement.parentElement;
+					koldf = tand.querySelector('td:nth-child(2)');
+						pox = koldf.innerText;
+						benam.push(pox);
 				}
 			}
+			banam = benam.filter((val, i, ar) => ar.indexOf(val) === i);
 			var kkj = sgik;
-			mydata = 'data:application/txt;charset=utf-8,'+encodeURIComponent(kkj);
+			var zeuf = banam.length;
+			if(zeuf == 0 || zeuf >= 5){pekk = " Заказов";}
+			if(zeuf == 1){pekk = " Заказ";}
+			if(zeuf > 1 && zeuf < 5){pekk = " Заказа";}
+			if(kkj == 0 || kkj >= 5){pzkk = " Позиций";}
+			if(kkj == 1){pzkk = " Позиция";}
+			if(kkj > 1 && kkj < 5){pzkk = " Позиции";}
+			mydata = 'data:application/txt;charset=utf-8,'+encodeURIComponent(kkj+pzkk+", "+zeuf+pekk);
 			this.href = mydata;
 			this.download = foday+'.txt';
 			sgik = 0;
-		})
+			banam = 0;
+		});
+		ojp = document.querySelectorAll('input[name^="table_amount_"]');//Для навигации сверху-вниз стрелкой
+			for(var i = 0; i < ojp.length; i++){
+				gofr = ojp[i];
+				gofr.setAttribute('class','dant'+i);
+				to_ii = document.querySelector(".dant"+i); 
+				to_ii.addEventListener("keydown", function(e){
+				if(e.keyCode == 40){
+					teky = this.getAttribute('class');
+					f = teky.substring(4);
+					gz = Number(f)+1;
+					if(gz < ojp.length){
+					yach = document.querySelector(".dant"+gz).focus();
+					}
+				}
+				if(e.keyCode == 38){
+					teky = this.getAttribute('class');
+					f = teky.substring(4);
+					gz = Number(f)-1;
+					if(gz >= 0){
+					yach = document.querySelector(".dant"+gz).focus();
+					}
+				}
+				});
+			}
+			}
 		}
 		}
 	});
@@ -121,22 +342,33 @@ if(document.readyState === 'complete'){
 			if(maner == undefined){
 				console.log('Настройки пустые');
 			}else{
-			par = maner[4];
+			par = maner[7];
 			if(par == 1){
-		var gogo = document.querySelector('#form-from-input'), gege = document.querySelector('#form-to-input'), sklad = document.querySelector('#form-shop-input'), cheak = document.querySelector('#form-excel'), bodyt = document.querySelector('body');
-			bodyt.insertAdjacentHTML("afterbegin", "<div id='ngen' style='display:none;position:fixed;width:100%;height:100%;z-index:99;'><div style='position:fixed;background-color:#fff;opacity:0.79;width:100%;height:100%;'></div><div style='position:relative;margin:auto;width:900px;height:550px;background-color:#fff;border:2px solid #b1b1b1;margin-top:70px;border-radius:10px;'><div><a style='width:20px;height:20px;font-size:20px;color:#a2a2a2;border: 3px solid #b1b1b1;right:-16px;position:absolute;top:-16px;background:#fff;border-radius:15px;padding:3px;text-align:center;font-family:sans-serif;' href=''>X</a></div><div style='height:480px;width:880px;margin:20px 10px 10px 10px;overflow-y:auto;' id='dracon'></div><div style='right:25px;position:absolute;bottom:5px'><input type='button' class='dedel' value='Подготовить' style='background:#ce466c;border:1px solid #ce466c;padding:5px;color:#ffffff;margin-right:3px;'><input type='button' class='sedel' value='Сохранить' style='background:#47b1b1;border:1px solid #47b1b1;padding:5px;color:#ffffff;'></div></div></div>");
+		var gogo = document.querySelector('#form-from-input'), gege = document.querySelector('#form-to-input'), sklad = document.querySelector('#form-shop-input'), cheak = document.querySelector('#form-excel'), hestys = document.querySelector('head');
+		hestys.insertAdjacentHTML("beforeEnd", "<style>@media print{th, td{vertical-align:middle;text-align:center !important}thead{background-color:#ccc;}table{border:1px solid #ccc;font-size:10px !important;}a[href]{color:#222222;}table#nepoi{border:0px solid #fff;}#nepoi th, #nepoi td{border:0px solid #fff !important;height:14px;}#pigry, #otgry{text-align:right !important;}#zapity{font-weight:600;font-size:14px;}thead th{background:#ccc !important;}#cdats,#pdats{display:none !important;}}</style>");
+		document.querySelector('#navigator').insertAdjacentHTML("beforeEnd", "<div id='ngen' style='width:100%;height:30px;'><input type='button' class='sedel' value='Сохранить' style='display:none;background:rgb(136 71 177);border:1px solid rgb(136 71 177);padding:7px 7px;color: rgb(255, 255, 255);border-radius:3px;font-weight:600;'></div>");
 		tData();
 		gogo.value = today, gege.value = today, sklad.value = 83;
 		binv = document.querySelector('#form-submit-input');
 		niuy = binv.parentElement;
-		niuy.insertAdjacentHTML("beforeEnd", "<input type='button' class='viex2' value='Ускорение' >");
+		samsn = document.querySelector('small').parentElement;
+		vilae = samsn.innerText
+		valueSplit = vilae.split(' ');
+		phFam = valueSplit[0];
+		phNam = valueSplit[1];
+		phNam2 = phNam.substring(0,1);
+		niuy.insertAdjacentHTML("beforeEnd", "<input type='button' class='viex2' value='Ускорение' style='background:#1684e3;border:1px solid #1684e3;color:rgb(255, 255, 255);'>");
 		bunni = document.querySelector('.viex2');
 		bunni.addEventListener("click", function(){
-			forts = document.querySelector('#ngen');
-			forts.style.display = 'block';
-			tabe = document.querySelector('table').innerHTML;
-			document.querySelector('#dracon').insertAdjacentHTML("beforeEnd", "<table style='font-size:9px;' border='1'>"+tabe+"</table>");
-			stoka = document.querySelectorAll('tr');
+			tabe = document.querySelector('table').innerHTML; 
+			bian = document.querySelector('#content');
+			bian.innerHTML = '';
+			bian.insertAdjacentHTML("beforeEnd", "<div><table id='nepoi'><tbody><tr><td style='width:48px;'></td><td style='width:42px;'></td><td id='zapity' colspan='2'>Передача актов разногласий от ИЛ на СРХ</td><td> </td><td> </td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td style='width:638px;'></td><td style='width:236px;'>Дата актов:</td><td id='udata' style='width:114px;'></td><td><input type='button'  id='cdats' value='clearData'></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div><table style='font-size:9px;' border='1' id='dratal'>"+tabe+"</table></div><div><table id='nepoi'><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td style='width:48px;'></td><td style='width:42px;'></td><td style='width:638px;'></td><td style='width: 238px;'>Дата передачи:</td><td id='updata'></td><td><input type='button'  id='pdats' value='clearData'></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td colspan='2' id='otgry' style='width:638px;'>Отгрузил________________________</td><td style='width:112px;' id='phNam'></td><td ></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td colspan='2' id='pigry' style='width:638px;'>Принял_________________________</td><td></td><td id='udata'></td></tr></tbody></table></div>");
+			buzz = document.querySelector('#dratal'), usida = document.querySelector('#phNam'), ubida = document.querySelector('#updata'), upipa = document.querySelector('#udata'), cdats = document.querySelector('#cdats');
+			usida.innerHTML = phFam +' '+ phNam2+'.';
+			ubida.innerHTML = foday;
+			upipa.innerHTML = today;
+			stoka = buzz.querySelectorAll('tr');
 			for (var i =0, pedos=stoka.length; i< pedos; i++){
 				koki = stoka[i];
 				koki.classList.add('str'+i);
@@ -151,10 +383,8 @@ if(document.readyState === 'complete'){
 						loki.classList.add(i+'stb'+j);
 					}
 			}
-		});
-		todel = document.querySelector('.dedel');
-		todel.addEventListener("click", function(){
-			daron = document.querySelector('#dracon');
+			daron = document.querySelector('#dratal');
+			oian = document.querySelector('h2').remove();
 			stoka = daron.querySelectorAll('tr');
 			for (var i =0, pedos=stoka.length; i< pedos; i++){
 				koki = stoka[i];
@@ -193,20 +423,30 @@ if(document.readyState === 'complete'){
 						}if(locas == i+'stb8'){loki.insertAdjacentHTML("afterEnd", '<td>'+bsx+'</td>');
 						}if(locas == i+'stb9'){
 							bju = loki.innerText;
-							if(bju == '0'){
+							if(bju == '' || bju == '0'){
 								loki.parentElement.remove();
 							}
 						}
 					}
 			}
-			table = daron.querySelector('table');
+			table = daron;
 			sortedRows = Array.from(table.rows).slice(1).sort((rowA,rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
 			table.tBodies[0].append(...sortedRows);
+			eorts = document.querySelector('.sedel');
+			eorts.style.display = 'block';
+			
+			cdats.addEventListener("click", function(){
+				upipa.innerHTML = '';
+			});
+			pdats.addEventListener("click", function(){
+				ubida.innerHTML = '';
+			});
 		});
+		
 		tosav = document.querySelector('.sedel');
 		tosav.addEventListener("click", function(){
-			var ttx = document.querySelector('#dracon').innerHTML;
-			download(ttx, goday+'.xls');
+			var ttx = document.querySelector('#content').innerHTML;
+			download(ttx, giday+'.xls');
 		});
 		}
 		}
@@ -218,7 +458,7 @@ if(document.readyState === 'complete'){
 			if(maner == undefined){
 				console.log('Настройки пустые');
 			}else{
-			par = maner[5];
+			par = maner[8];
 			if(par == 1){
 		sipa = document.querySelector('#form-employee-input');
 		sipa.value = 13553;
@@ -236,14 +476,13 @@ if(document.readyState === 'complete'){
 				gogo = voxv.querySelector('td:nth-child(3)').innerText;
 				maner.push(gogo);
 			}
-			//console.log(maner);
 			bjkil = maner.filter((val, i, ar) => ar.indexOf(val) === i);
 			chrome.storage.sync.set({'miniv':bjkil});
 			}));
 			}else{
 				console.log('Массив не существует');
 			kaker = [];
-			maner=kaker;//.split(' ');
+			maner=kaker;
 			Array.from(sbutton, el => el.addEventListener('click', e => {
 			banch = e.target;
 			voxv = banch.parentElement.parentElement.parentElement.parentElement;
@@ -252,7 +491,6 @@ if(document.readyState === 'complete'){
 				gogo = voxv.querySelector('td:nth-child(3)').innerText;
 				maner.push(gogo);
 			}
-			//console.log(maner);
 			bjkil = maner.filter((val, i, ar) => ar.indexOf(val) === i);
 			chrome.storage.sync.set({'miniv':bjkil});
 			}));
@@ -268,7 +506,7 @@ if(document.readyState === 'complete'){
 			if(maner == undefined){
 				console.log('Настройки пустые');
 			}else{
-			par = maner[5];
+			par = maner[8];
 			if(par == 1){
 		vafa = document.querySelector('h2');
 		vafa.insertAdjacentHTML("beforeEnd", "<a id='clele' style='cursor:pointer;'>Очистить Хранилище</a>");
@@ -278,7 +516,6 @@ if(document.readyState === 'complete'){
 				console.log('в сторадже ничего не сохранено');
 			}else{
 				var maner = items.miniv;
-				//console.log(maner);
 				for(index = 0; index < maner.length; ++index){
 					var urlx = document.querySelectorAll('a[href="https://www.bookvoed.ru/book?axid='+maner[index]+'"]');
 					for(var i = 0; i < urlx.length; i++){
@@ -296,8 +533,6 @@ if(document.readyState === 'complete'){
 				gigs = document.querySelector('input[name="queue_ids"]');
 				if(gigs){
 					gigs.value = late;
-				}else{
-					//console.log('Oshibok net');
 				}
 			}
 		});
@@ -311,144 +546,7 @@ if(document.readyState === 'complete'){
 		}
 	});
 	}
-	if(flt == 'https://my2.bookvoed.ru/shop/logist/send/orders/selfdelivery?type=spb'){//Подсчет для отгрузки Магазы
-	chrome.storage.sync.get(['setnag'], function(items){
-		var maner = items.setnag;
-			if(maner == undefined){
-				console.log('Настройки пустые');
-			}else{
-			par = maner[6];
-			if(par == 1){
-	moki = [];
-		voxl = document.querySelectorAll('tr > td:last-child');
-		for (var i =0, pedos=voxl.length; i< pedos; i++){
-			koki = voxl[i];
-			moki.push(koki.innerText);
-		}
-		Array.from(document.querySelectorAll('tr > td:last-child'))
-		.filter((n, i, a) => n.innerText !== a[i - 1]?.innerText)
-		.forEach(n => n.innerHTML = `<a class="bon4" style="cursor:pointer;font-weight:bold;">${n.innerText}</a>`);
-		var stll = document.querySelectorAll(".bon4");
-		for (var i =0, pedos=stll.length; i< pedos; i++){
-			koki = stll[i];
-			koki.addEventListener("click", function(){
-				var result = moki.reduce(function(acc, el){acc[el] = (acc[el] || 0) + 1;return acc;}, []);
-				alert(result[this.innerText]);
-			});
-		}
-		}
-		}
-	});
-	}
-	if(flt == 'https://my2.bookvoed.ru/shop/logist/send/orders/selfdelivery?type=reg'){//Подсчет для отгрузки Регионы
-	chrome.storage.sync.get(['setnag'], function(items){
-		var maner = items.setnag;
-			if(maner == undefined){
-				console.log('Настройки пустые');
-			}else{
-			par = maner[6];
-			if(par == 1){
-		moki = [];
-		voxl = document.querySelectorAll('tr > td:last-child');
-		for (var i =0, pedos=voxl.length; i< pedos; i++){
-			koki = voxl[i];
-			moki.push(koki.innerText);
-		}
-		Array.from(document.querySelectorAll('tr > td:last-child'))
-		.filter((n, i, a) => n.innerText !== a[i - 1]?.innerText)
-		.forEach(n => n.innerHTML = `<a class="bon4" style="cursor:pointer;font-weight:bold;">${n.innerText}</a>`);
-		var stll = document.querySelectorAll(".bon4");
-		for (var i =0, pedos=stll.length; i< pedos; i++){
-			koki = stll[i];
-			koki.addEventListener("click", function(){
-				var result = moki.reduce(function(acc, el){acc[el] = (acc[el] || 0) + 1;return acc;}, []);
-				alert(result[this.innerText]);
-			});
-		}
-		}
-		}
-	});
-	}
-	if(wiol == 'https://my2.bookvoed.ru/shop/delivery/orders/sendings?delivery=440&status=4869'){// Отгрузка Реестры EMS
-	chrome.storage.sync.get(['setnag'], function(items){
-		var maner = items.setnag;
-			if(maner == undefined){
-				console.log('Настройки пустые');
-			}else{
-			par = maner[7];
-			if(par == 1){
-		boer = document.querySelector('body'), contik = document.querySelector('#content a:nth-child(6)');
-		boer.insertAdjacentHTML("afterbegin", "<div id='ngeer' style='display:none;position:fixed;width:100%;height:100%;z-index:99;'><div style='position:fixed;background-color:#fff;opacity:0.79;width:100%;height:100%;'></div><div style='position:relative;margin:auto;width:400px;min-height:200px;max-height:480px;background-color:#fff;border:2px solid #b1b1b1;margin-top:100px;border-radius:10px;'><div style='max-height:420px;width:380px;margin:20px 10px 10px 10px;font-family:cursive;overflow-y:auto;'><div>Отмеченные магазины:</div><div id='emsya'></div></div><div style='right:25px;position:absolute;bottom:5px'><input type='button' class='daems' value='На печать' style='background:#47b1b1;border:1px solid #47b1b1;padding:5px;color:#ffffff;margin-right:5px;outline:none;'><input type='button' class='neems' value='Добавить / Изменить' style='background:#ce466c;border:1px solid #ce466c;padding:5px;color:#ffffff;margin-right:3px;outline:none;'></div></div></div>");
-		contik.insertAdjacentHTML("afterEnd", "<a id='totax' style='margin:10px;font-weight:bold;cursor:pointer;color:#ff0909;font-size:12pt;'>EMS Now!</a>");
-		tData();
-		drad = [
-		['0'],
-		['РМ КК 169 Калининград','РМ КМ 147 Котлас','РМ КМ 148 Сыктывкар','РМ КМ 151 Коряжма','РМ КМ 164 Калининград','РМ КМ 167 Северодвинск','РМ КМ 170 Калининград','РМ КМ 171 Северодвинск, Архангельское шоссе 120','РМ КМ 172 Псков, Труда 50','РМ КМ 178 Архангельск Советская 25','РМ КМ 179 Архангельск Розинга 10','РМ КМ 180 Луга Урицкого 77','РМ КМ 35 Псков, Рижский пр., 16','РМ КМ 36 Кингисепп, ул.Октябрьская, 9','РМ КМ 54Великие Луки','РМ КМ 73 Североморск, ул. Флотских Строителей, 1А','РМ КМ 81 Северодвинск','РМ КМ 82 Архангельск, Тимме, д.4,к.3','РМ КС 130 Псков, ул.Кузбасской Дивизии, 19','РМ КС 138 Сосновый Бор','РМ КС 141 Архангельск, Ленинградский, 38','РМ КС 149 Архангельск, Воскресенская, 20','РМ КС 31 Архангельск, ул. Поморская 9'],
-		['РМ КК 169 Калининград','РМ КМ 128 Вологда, Советский, 12','РМ КМ 132 Череповец, пр.Октябрьский, 57','РМ КМ 133 Вологда, ул Горького 122   ТЦ Макси','РМ КМ 147 Котлас','РМ КМ 148 Сыктывкар','РМ КМ 151 Коряжма','РМ КМ 162 Череповец, Победы','РМ КМ 164 Калининград','РМ КМ 167 Северодвинск','РМ КМ 170 Калининград','РМ КМ 171 Северодвинск, Архангельское шоссе 120','РМ КМ 172 Псков, Труда 50','РМ КМ 178 Архангельск Советская 25','РМ КМ 179 Архангельск Розинга 10','РМ КМ 35 Псков, Рижский пр., 16','РМ КМ 36 Кингисепп, ул.Октябрьская, 9','РМ КМ 37 Череповец, Ленинградская','РМ КМ 43 Вологда, Ленинградская,100','РМ КМ 44 Череповец, Ленина 90','РМ КМ 54Великие Луки','РМ КМ 73 Североморск, ул. Флотских Строителей, 1А','РМ КМ 74 Вологда, Пошехонское','РМ КМ 81 Северодвинск','РМ КМ 82 Архангельск, Тимме, д.4,к.3','РМ КС 129 Череповец, пр.Победы, 200','РМ КС 130 Псков, ул.Кузбасской Дивизии, 19','РМ КС 138 Сосновый Бор','РМ КС 141 Архангельск, Ленинградский, 38','РМ КС 149 Архангельск, Воскресенская, 20','РМ КС 31 Архангельск, ул. Поморская 9','РМ КС 42 Вологда, Мира, 78'],
-		['РМ КК 169 Калининград','РМ КМ 128 Вологда, Советский, 12','РМ КМ 132 Череповец, пр.Октябрьский, 57','РМ КМ 133 Вологда, ул Горького 122   ТЦ Макси','РМ КМ 162 Череповец, Победы','РМ КМ 164 Калининград','РМ КМ 170 Калининград','РМ КМ 37 Череповец, Ленинградская','РМ КМ 43 Вологда, Ленинградская,100','РМ КМ 44 Череповец, Ленина 90','РМ КМ 54Великие Луки','РМ КМ 74 Вологда, Пошехонское','РМ КС 129 Череповец, пр.Победы, 200','РМ КС 42 Вологда, Мира, 78'],
-		['РМ КК 169 Калининград','РМ КМ 128 Вологда, Советский, 12','РМ КМ 132 Череповец, пр.Октябрьский, 57','РМ КМ 133 Вологда, ул Горького 122   ТЦ Макси','РМ КМ 162 Череповец, Победы','РМ КМ 164 Калининград','РМ КМ 170 Калининград','РМ КМ 37 Череповец, Ленинградская','РМ КМ 43 Вологда, Ленинградская,100','РМ КМ 44 Череповец, Ленина 90','РМ КМ 54Великие Луки','РМ КМ 74 Вологда, Пошехонское','РМ КС 129 Череповец, пр.Победы, 200','РМ КС 42 Вологда, Мира, 78'],
-		['РМ КК 169 Калининград','РМ КМ 128 Вологда, Советский, 12','РМ КМ 132 Череповец, пр.Октябрьский, 57','РМ КМ 133 Вологда, ул Горького 122   ТЦ Макси','РМ КМ 162 Череповец, Победы','РМ КМ 164 Калининград','РМ КМ 167 Северодвинск','РМ КМ 170 Калининград','РМ КМ 171 Северодвинск, Архангельское шоссе 120','РМ КМ 178 Архангельск Советская 25','РМ КМ 179 Архангельск Розинга 10','РМ КМ 37 Череповец, Ленинградская','РМ КМ 43 Вологда, Ленинградская,100','РМ КМ 44 Череповец, Ленина 90','РМ КМ 54Великие Луки','РМ КМ 74 Вологда, Пошехонское','РМ КМ 81 Северодвинск','РМ КМ 82 Архангельск, Тимме, д.4,к.3','РМ КС 129 Череповец, пр.Победы, 200','РМ КС 141 Архангельск, Ленинградский, 38','РМ КС 149 Архангельск, Воскресенская, 20','РМ КС 31 Архангельск, ул. Поморская 9','РМ КС 42 Вологда, Мира, 78'],
-		['0'],
-		['0']
-		];
-		nms = document.querySelector('.neems'), dms = document.querySelector('.daems'), skat = document.querySelectorAll('td:nth-child(5)'), ettos = document.querySelector('#totax');
-		ettos.addEventListener("click", function(){
-		emsm = [];
-		for (var i =0, mure=skat.length; i< mure; i++){
-			doty = skat[i];
-			mak = doty.innerText;
-			kj = gaday;
-			king = drad[kj];
-			ott = king.indexOf(mak) > -1;
-			if(ott == true){
-				binart = doty.parentElement.firstChild;
-				gai = binart.querySelector('input');
-				gai.checked = true;
-				emsm.push(mak);
-			}
-		}
-		if(emsm == null){
-			var emsm = ['Что сюда долбишься, тут ничего нет! Или уже все отгружено'];
-			dms.style.display = 'none';
-		}
-		gesm = [...new Set(emsm)];
-		htmn = '<ul>';
-		gesm.forEach(function(item, i, arr){htmn += '<li>'+item+'</li>';});
-		htmn += '</ul>';
-		koki = document.querySelector('#ngeer');
-		document.querySelector('#emsya').innerHTML = htmn;
-		koki.style.display = 'block';
-		});
-		nms.addEventListener("click", function(){
-			koki.style.display = 'none';
-		});
-		dms.addEventListener("click", function(){
-			emsb = document.querySelector('#form-submit_ems-input');
-			emsb.click();
-		});
-		}
-		}
-	});
-	}
-	if(piolt == 'https://my2.bookvoed.ru/shop/logist/send/orders/print?sending=5'){// Ссылки на заказы при печати накладной маршрута 
-	chrome.storage.sync.get(['setnag'], function(items){
-		var maner = items.setnag;
-			if(maner == undefined){
-				console.log('Настройки пустые');
-			}else{
-			par = maner[8];
-			if(par == 1){
-		voxl = document.querySelectorAll('tr > td:nth-child(2)');
-		for (var i =0, pedos=voxl.length; i< pedos; i++){
-			koki = voxl[i];
-			koag = koki.innerText;
-			koki.innerHTML = koki.innerHTML.replace(koag, '<a href="https://my2.bookvoed.ru/shop/order?id='+koag+'">'+koag+'</a>');
-		}
-		}
-		}
-	});
-	}
-	if(cult == 'https://my2.bookvoed.ru/shop/logist/packing/outpost?or'){//Быстрый переход после подтверждения логист заказа
+	if(biulc == 'https://my2.bookvoed.ru/search?table%5Bforce%5D=1&results%5Btable%5D=2971&results%5Bsubs%5D%5B0%5D%5Blink%5D=4462&results%5Bsubs%5D%5B0%5D%5Btable%5D=1108&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Blink%5D=1684&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Btable%5D=173&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B1%5D%5Bfield%5D=174&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B1%5D%5Bfield%5D=5354&results%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bfilters%5D%5B1%5D%5Bfield%5D=2977'){
 	chrome.storage.sync.get(['setnag'], function(items){
 		var maner = items.setnag;
 			if(maner == undefined){
@@ -456,10 +554,609 @@ if(document.readyState === 'complete'){
 			}else{
 			par = maner[9];
 			if(par == 1){
-		document.body.innerHTML = document.body.innerHTML.replace('<button onclick="history.back()">Вернуться назад</button>', '<a href="https://my2.bookvoed.ru/shop/logist/orders/confirmAndWeight?delivery=3160"><button>IML LOGISTIC</button></a>');
+			mazad = [];
+			var ount = document.querySelector("#content");
+			ount.insertAdjacentHTML("beforebegin", "<div><input id='sypnym' type='text' maxlength='12' style='height:22px;border-radius:3px;border-color:#1684e3;border:2px solid #1684e3;background-color:#efefef;'><input id='trah' type='button' value='+ Add' style='background:#1684e3;border:1px solid #1684e3;color:rgb(255, 255, 255);padding:5px 29px;margin:0px 10px;border-radius:3px;font-weight:600;'><input id='posos' type='button' value='Save' style='background:#cd0e66;border:1px solid #cd0e66;color:rgb(255, 255, 255);padding:5px 29px;margin:0px 10px;border-radius:3px;font-weight:600;'></div>");
+			trah = document.querySelector("#trah"), posos = document.querySelector("#posos");
+			suuk = document.querySelector("#sypnym");
+			muuk = document.querySelector("#bar input");
+			suuk.focus();
+			suuk.addEventListener("change", function(){
+				bafas = suuk.value;
+				badas = bafas.substring(5,11);
+				muuk.value = badas;
+				muuk.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+				trah.removeAttribute('disabled');
+				//muuk.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));
+				//muuk.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));
+				//muuk.dispatchEvent(new Event('input', { bubbles: true }));
+				//muuk.dispatchEvent(new Event('change', { bubbles: true }));
+				//muuk.submit();
+			});
+			trah.addEventListener("click", function(){
+					rekre = document.querySelector("#results");
+					rexre = rekre.querySelector("table");
+					balls = rexre.querySelector("td:nth-child(4)").innerText; 
+					trah.setAttribute('disabled','true');
+					suuk.value = '';
+					suuk.focus();
+					mazad.push(balls);
+			});
+			posos.addEventListener("click", function(){
+				zazad = [...new Set(mazad)];
+				console.log(zazad);
+				chrome.storage.sync.set({'asrhat':zazad});
+			});
+			}
+			}
+	});
+	}
+	if(lult == 'https://my2.bookvoed.ru'){// Инструменты СХ/СРХ
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+			if(maner == undefined){
+				console.log('Настройки пустые');
+			}else{
+			par = maner[9];
+			if(par == 1){
+			tData();
+			dunt = document.querySelector("#navigator"),bioy = document.querySelector("head");
+			if(dunt){
+				fakl = dunt.firstChild;
+				fakl.insertAdjacentHTML("beforeEnd", "<a id='ternsor' style='display:inline-block;line-height:2;padding:0 .5em;margin:0 1px 1px 0;font-weight:600;color:#e8a6ec;cursor:pointer;'>Обработка СХ_СРХ</a>");
+			}
+			pint = document.querySelector("#ternsor");
+			if(pint){
+			pint.addEventListener("click", function(){
+				var burt = document.querySelector("#navigator-ishopLogist");
+				var miyo = document.querySelector("#content");
+				var bith = document.querySelector("h2");
+				samsn = document.querySelector('small').parentElement;
+				vilae = samsn.innerText
+				valueSplit = vilae.split(' ');
+				phFam = valueSplit[0];
+				phNam = valueSplit[1];
+				phNam2 = phNam.substring(0,1);
+				if(burt){burt.remove();}
+				if(burt){bith.remove();}
+				miyo.innerHTML = '';
+				miyo.insertAdjacentHTML("beforeend", "<div id='cre_pa' style='padding:.5em 1.5em .5em 1.5em;'><div id='le_do' style='display:table-cell;vertical-align:top;width:600px;'><div style='margin:auto;width:550px;'><p><h3 style='text-align:center;border-bottom:1px solid #ccc;color:#4d87c7;'>Акты СХ</h3></p></div><div style='margin:auto;width:550px;'><div style='display:inline-block;vertical-align:top;width:200px;max-height:500px;overflow-y:auto;'><input class='dant0'><input class='dant1'><input class='dant2'><input class='dant3'><input class='dant4'><input class='dant5'><input class='dant6'><input class='dant7'><input class='dant8'><input class='dant9'><input class='dant10'><input class='dant11'><input class='dant12'><input class='dant13'><input class='dant14'><input class='dant15'><input class='dant16'><input class='dant17'><input class='dant18'><input class='dant19'><input class='dant20'><input class='dant21'><input class='dant22'><input class='dant23'><input class='dant24'><input class='dant25'><input class='dant26'><input class='dant27'><input class='dant28'><input class='dant29'><input class='dant30'><input class='dant31'><input class='dant32'><input class='dant33'><input class='dant34'><input class='dant35'><input class='dant36'><input class='dant37'><input class='dant38'><input class='dant39'><input class='dant40'><input class='dant41'><input class='dant42'><input class='dant43'><input class='dant44'><input class='dant45'><input class='dant46'><input class='dant47'><input class='dant48'><input class='dant49'><input class='dant50'><input class='dant51'><input class='dant52'><input class='dant53'><input class='dant54'><input class='dant55'><input class='dant56'><input class='dant57'><input class='dant58'><input class='dant59'><input class='dant60'><input class='dant61'><input class='dant62'><input class='dant63'><input class='dant64'><input class='dant65'><input class='dant66'><input class='dant67'><input class='dant68'><input class='dant69'><input class='dant70'><input class='dant71'><input class='dant72'><input class='dant73'><input class='dant74'><input class='dant75'><input class='dant76'><input class='dant77'><input class='dant78'><input class='dant79'><input class='dant80'><input class='dant81'><input class='dant82'><input class='dant83'><input class='dant84'><input class='dant85'><input class='dant86'><input class='dant87'><input class='dant88'><input class='dant89'><input class='dant90'><input class='dant91'><input class='dant92'><input class='dant93'><input class='dant94'><input class='dant95'><input class='dant96'><input class='dant97'><input class='dant98'><input class='dant99'></div><div style='display:inline-block;vertical-align:top;width:340px;'><button id='splash'>Подготовить</button><button id='kasher'>Заполнить</button><button id='ytaher'> X </button><div style='width:340px;'><textarea id='dp1' style='resize:none;width:340px;height:94px;'></textarea><textarea id='dp2' style='resize:none;width:340px;height:94px;'></textarea><textarea id='dp3' style='resize:none;width:340px;height:94px;'></textarea><textarea id='dp4' style='resize:none;width:340px;height:94px;'></textarea><textarea id='dp5' style='resize:none;width:340px;height:94px;'></textarea></div></div></div></div><div id='re_do' style='display:table-cell;vertical-align:top;width:500px;'><div style='margin:auto;width:410px;'><p><h3 style='text-align:center;border-bottom:1px solid #ccc;color:#4d87c7;'>Интернет для СРХ</h3></p></div><div style='margin:auto;width:410px;'><div style='display:inline-block;vertical-align:top;width:200px;max-height:500px;overflow-y:auto;'><textarea id='mart0'style='margin:0px;height:490px;width:180px;overflow-y:auto;resize:none;overflow-x:hidden;'></textarea></div><div style='display:inline-block;vertical-align:top;width:210px;'><button id='mamash'>Подготовить</button><div style='width:220px;'><div id='ll1' style='display:table-cell;vertical-align:top;width:100px;'><table id='table1'><tbody></tbody></table><button id='c1stb'>Copy</button></div><div id='ll2' style='display:table-cell;vertical-align:top;width:100px;'><table id='table2'><tbody></tbody></table><button id='c2stb'>Copy</button></div></div><div><button id='kamute' style='width:100%;height:30px;'>Проверка</button></div></div></div></div></div></div>");
+				document.querySelector('#navigator').insertAdjacentHTML("beforeEnd", "<div id='ngen' style='width:100%;height:30px;'><input type='button' class='sedem' value='Сохранить' style='display:none;background:rgb(136 71 177);border:1px solid rgb(136 71 177);padding:7px 7px;color: rgb(255, 255, 255);border-radius:3px;font-weight:600;margin-top:20px;'></div>");
+			ytaher = document.querySelector("#ytaher"),kasher = document.querySelector("#kasher"),binda = document.querySelector("#splash"),sinka = document.querySelector("#mamash"),c1stb = document.querySelector("#c1stb"),c2stb = document.querySelector("#c2stb"),kaite = document.querySelector("#kamute");
+			c1stb.setAttribute('style','display:none;'); 
+			c2stb.setAttribute('style','display:none;'); 
+			binda.setAttribute('style','color:#fff;padding:10px 30px;font-weight:bold;margin:0px 10px;border:#909090 solid 1px;border-radius:3px;background-color:#4d87cb;cursor:pointer;box-sizing:border-box;text-align:center;margin-bottom:10px;display:table-cell;');
+			kasher.setAttribute('style','color:#fff;padding:10px 25px;font-weight:bold;border:#9fb5b4 solid 1px;border-radius:3px;background-color:#47cb8e;cursor:pointer;box-sizing:border-box;text-align:center;margin-bottom:10px;display:table-cell;'); 
+			ytaher.setAttribute('style','color:#545454;padding:10px 10px;border:#bbbbbb solid 1px;border-radius:3px;background-color:#fff;cursor:pointer;box-sizing:border-box;text-align:center;margin:0px 10px;margin-bottom:10px;display:table-cell;'); 
+			sinka.setAttribute('style','width:200px;color:#828282;padding:10px 5px;font-weight:bold;display:block;margin:0px 40px;margin-top:10px;border:#909090 solid 1px;border-radius:3px;background-color:#eaea82;cursor:pointer;box-sizing:border-box;margin-right:0px;text-align:center;margin:auto;margin-bottom:10px;'); 
+			dp1=[],dp2=[],dp3=[],dp4=[],dp5=[];
+			dh1=[],dh2=[];
+			iin = document.querySelectorAll('input[class^="dant"]');
+			for(var i = 0; i < iin.length; i++){
+				gofr = iin[i];
+				gofr.setAttribute('style', 'height:25px;text-align:right;border:1px solid #ccc;margin:1px;');
+				gofr.setAttribute('maxlength', '10');
+				gofr.setAttribute('placeholder', 'Номер журнала '+i);
+				bg = ".dant"+i;
+				to_ii = document.querySelector(".dant"+i); 
+				to_ii.addEventListener("keydown", function(e){
+				if(e.keyCode == 40){
+					teky = this.getAttribute('class');
+					f = teky.substring(4);
+					gz = Number(f)+1;
+					if(gz < iin.length){
+					yach = document.querySelector(".dant"+gz).focus();
+					}
+				}
+				});
+			}
+			ytaher.addEventListener("click", function(){
+				chrome.storage.sync.get(['asrhat'], function(items){
+				var pixxa = items.asrhat;
+				if(pixxa == undefined || pixxa == ''){
+					alert('Список журналов уже зачищен');
+				}else{
+					cash = '';
+					chrome.storage.sync.set({'asrhat':cash});
+					alert('Список журналов зачищен');
+				}
+				});
+			});
+			kasher.addEventListener("click", function(){
+				chrome.storage.sync.get(['asrhat'], function(items){
+				var picca = items.asrhat;
+				if(picca == undefined || picca == ''){
+					alert('В базе отсутствуют какие-либо журналы');
+				}else{
+					jiklo = picca.length;
+					vever = document.querySelectorAll('input[class^="dant"]');
+					for(var l = 0; l < jiklo; l++){
+						document.querySelector('.dant'+l).value = picca[l];
+					}
+				}
+				});
+			});
+			c1stb.addEventListener("click", function(){
+				staba1 = iyi.substr(0,187);
+				dummy = document.createElement("textarea");
+				document.body.appendChild(dummy);
+				dummy.value = staba1;
+				dummy.select();
+				document.execCommand("copy");
+				document.body.removeChild(dummy);
+				stabal.print();
+			});
+			c2stb.addEventListener("click", function(){
+				staba2 = iyi.substr(187,376);
+				summy = document.createElement("textarea");
+				document.body.appendChild(summy);
+				summy.value = staba2;
+				summy.select();
+				document.execCommand("copy");
+				document.body.removeChild(summy);
+			});
+			kaite.addEventListener("click", function(){
+				tim = document.querySelector('#mart0').value;
+				buj = tim.substr(0,376);
+				piq = tim.replace(/\n/g,',');
+				dummy = document.createElement("textarea");
+				document.body.appendChild(dummy);
+				dummy.value = piq;
+				dummy.select();
+				document.execCommand("copy");
+				document.body.removeChild(dummy);
+				alert('Итоговые данные скопированы');
+			});
+			sinka.addEventListener("click", function(){ //интернет - СРХ
+				bioy.insertAdjacentHTML("beforeEnd", "<style>@media print{th, td{vertical-align:middle;text-align:center !important}thead{background-color:#ccc;}table{border:0px solid #ccc;font-size:14px !important;}a[href]{color:#222222;}table#nepoi{border:0px solid #fff;}#nepoi th, #nepoi td{border:0px solid #fff !important;height:14px;}#pigry, #otgry{text-align:right !important;}#zapity{font-weight:600;font-size:14px;}thead th{background:#ccc !important;}#rdats,#kdats{display:none !important;}}</style>");
+				eortt = document.querySelector('.sedem');
+				eortt.style.display = 'block';
+				jin = document.querySelector('#mart0').value;
+				cian = document.querySelector('#content');
+				cian.innerHTML = '';
+				iyi = jin.replace(/JS/g,'ЖТ');
+				pio1 = iyi.split('\n');
+				dadlit = pio1.length;
+				cian.insertAdjacentHTML("beforeEnd", "<div><table id='nepoi'><tbody><tr><td style='width:48px;'></td><td style='width:42px;'></td><td id='zapity' colspan='2'>Реестр накладных переноса с Интернет на СРХ</td><td> </td><td> </td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td style='width:638px;'></td><td style='width:236px;'>Дата создания:</td><td id='udata' style='width:114px;'>"+foday+"</td><td><input type='button' id='kdats' value='clearData'></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div><table style='font-size:12px;' border='1' id='dratal'><thead><tr><th></th><th>№</th><th>Журнал</th><th></th><th>№</th><th>Журнал</th></tr></thead><tbody id='garay'></tbody></table></div><div><table id='nepoi'><tbody><tr><td></td><td>Итого:</td><td><div style='text-align:left;font-size:20px;' id='kokoim'></div></td><td></td><td></td><td></td></tr><tr><td style='width:48px;'></td><td style='width:42px;'></td><td style='width:638px;'></td><td style='width: 238px;'>Дата передачи:</td><td id='updata'>"+foday+"</td><td><input type='button' id='rdats' value='clearData'></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td colspan='2' id='otgry' style='width:638px;'>Отгрузил________________________</td><td style='width:112px;' id='phNam'></td><td ></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td colspan='2' id='pigry' style='width:638px;'>Принял_________________________</td><td></td><td id=''></td></tr></tbody></table></div>");
+				//
+				kokoim = document.querySelector('#kokoim')
+				kokoim.innerHTML = dadlit;
+				sikj = Math.ceil(dadlit/2);
+				if(dadlit % 2 == 0){
+					lylyr = (dadlit-sikj);
+				}else{
+					lylyr = (dadlit-sikj)+1;
+				}
+				for(var x = 0; x <= (sikj-1); x++){
+					lalp = pio1[x];
+					lals = pio1[x+lylyr];
+					if(lals == undefined || lals == '' || !lals){
+						lals = '';
+					}					
+					gyuo = document.querySelector('#garay');
+					gyuo.insertAdjacentHTML("beforeEnd", "<tr><td></td><td>"+(x+1)+"</td><td>"+lalp+"</td><td></td><td>"+(x+lylyr+1)+"</td><td>"+lals+"</td>");
+				}
+			rdats = document.querySelector('#rdats'),kdats = document.querySelector('#kdats'),udats = document.querySelector('#updata'),udals = document.querySelector('#udata'),toida = document.querySelector('#phNam');
+				toida.innerHTML = phFam +' '+ phNam2+'.';
+			rdats.addEventListener("click", function(){
+				udats.innerHTML = '';
+			});
+			kdats.addEventListener("click", function(){
+				udals.innerHTML = '';
+			});
+			tosah = document.querySelector('.sedem');
+			tosah.addEventListener("click", function(){
+				var ttx = document.querySelector('#content').innerHTML;
+				download(ttx, giday+'.xls');
+			});
+			});
+			
+			binda.addEventListener("click", function(e){ //СХ
+			this.setAttribute('disabled','true');
+			this.setAttribute('style','color:#fff;padding:10px 30px;font-weight:bold;margin:0px 10px;border:#909090 solid 1px;border-radius:3px;background:#cdcdcd;cursor:pointer;box-sizing:border-box;text-align:center;margin-bottom:10px;display:table-cell;');
+				dte1 = document.querySelectorAll('input[class^="dant"]');
+				for(var l = 0; l < 20; l++){
+					kak = document.querySelector('.dant'+l).value;
+					kok = kak;
+					dp1.push(kok);
+				}for(var z = 20; z < 40; z++){
+					kak2 = document.querySelector('.dant'+z).value;
+					kok2 = kak2;
+					dp2.push(kok2);
+				}for(var x = 40; x < 60; x++){
+					kak3 = document.querySelector('.dant'+x).value;
+					kok3 = kak3;
+					dp3.push(kok3);
+				}for(var v = 60; v < 80; v++){
+					kak4 = document.querySelector('.dant'+v).value;
+					kok4 = kak4;
+					dp4.push(kok4);
+				}for(var b = 80; b < 100; b++){
+					kak5 = document.querySelector('.dant'+b).value;
+					kok5 = kak5;
+					dp5.push(kok5);
+				}
+				itog1 = dp1.join(',');takt1 = document.querySelector('#dp1').value = itog1;
+				itog2 = dp2.join(',');takt2 = document.querySelector('#dp2').value = itog2;
+				itog3 = dp3.join(',');takt3 = document.querySelector('#dp3').value = itog3;
+				itog4 = dp4.join(',');takt4 = document.querySelector('#dp4').value = itog4;
+				itog5 = dp5.join(',');takt5 = document.querySelector('#dp5').value = itog5;
+			});
+			});
+			}
+			}
+		}
+	});
+	}
+	if(flt == 'https://my2.bookvoed.ru/shop/delivery/orders/sendings?delivery=440&sh'){// Супер форма для отрисовки статы
+	chrome.storage.sync.get(['setnag'], function(items){
+	var maner = items.setnag;
+		if(maner == undefined){
+			console.log('Настройки пустые');
+		}else{
+			par = maner[10];
+		if(par == 1){
+		vafaq = document.querySelector('h2'),nibve = document.querySelector('body');
+		vafaq.insertAdjacentHTML("beforeEnd", "<div><input id='bemasin' type='button' value='+ data' style='font-size:11pt;padding:4px 25px;text-transform:uppercase;'><input id='bevyavio' type='button' value='Build graph' style='font-size:11pt;padding:4px 25px;text-transform:uppercase;margin-left:10px;'></div>");
+		nibve.insertAdjacentHTML("afterbegin", "<div id='bublid' style='display:none;position:fixed;width:100%;height:100%;z-index:99;'><div style='position:fixed;background-color:#fff;opacity:0.79;width:100%;height:100%;'></div><div style='position:relative;margin:auto;width:1200px;height:550px;background-color:#fff;border:2px solid #b1b1b1;margin-top:70px;border-radius:10px;'><div><a style='width:20px;height:20px;font-size:20px;color:#a2a2a2;border: 3px solid #b1b1b1;right:-16px;position:absolute;top:-16px;background:#fff;border-radius:15px;padding:3px;text-align:center;font-family:sans-serif;' href=''>X</a><div id='toples'></div></div><div style='height:480px;width:1180px;margin:20px 10px 10px 10px;overflow-y:hidden;' id='dadala'><div id='sec_l' style='display:table-cell;vertical-align:top;width:240px;height:480px;border-right:1px solid #ddd;'><div style='margin:5px;height: 100px;text-align: center;'>Сотрудники</div><div id='podva' style='margin:0px 10px;font-size:12px;height:290px;overflow-y:auto;'></div><div style='height:80px;text-align:center;'><div>Среднее время:</div><div id='nadval' style='font-size:24pt;color:#000;'></div><div id='ponyad'></div></div></div><div id='sec_r' style='display:table-cell;vertical-align:top;width:940px;height:480px;'><canvas id='lyapitu' style='width:860px;height:470px;margin:0px 40px;'></canvas></div></div><div style='right:25px;position:absolute;bottom:5px'><input type='button' id='finbu' value='Построить' style='background:#7680f1;border:1px solid #7680f1;padding:5px;color:#ffffff;margin-right:9px;'><input type='button' id='ottet' value='Очистить' style='background:#ce466c;border:1px solid #ce466c;padding:5px;color:#ffffff;'></div></div></div>");
+		
+		iiii = document.querySelector("#bemasin"), ssss = document.querySelector("#finbu"), mmmm = document.querySelector("#bevyavio"), ottet = document.querySelector("#ottet"), besos = document.querySelector('#bublid');
+		
+			in_memory();
+			iiii.addEventListener("click", function(){//кнопка сбора данных
+			iiii.setAttribute('disabled','true');
+			gggg = document.querySelectorAll("tbody tr");
+			for(var lo = 0; lo < gggg.length; lo++){
+				acha = gggg[lo];
+				tData();
+				isld = acha.querySelector('td:nth-child(3)');
+				if(isld){
+					bndg = isld.innerText;
+					piss = bndg.substring(0,10);
+					ysld = acha.querySelector('td:nth-child(5)').innerText;
+					visosa = foday;
+					if(piss == visosa){
+						pechm = acha.querySelector('td:nth-child(3)').innerText.substring(11);
+						sisi.push({data: piss, time: pechm, name: ysld});
+					}
+				}else{}
+			}
+				chrome.storage.local.set({'statgraph':sisi});
+			});
+
+			ottet.addEventListener("click", function(){
+				this.setAttribute('disabled','true');
+				this.setAttribute('style','background:#d2a4b1;border:1px solid #d2a4b1;padding:5px;color:#9a9a9a;');
+				setTimeout(() => this.removeAttribute('disabled'), 1500);
+				setTimeout(() => this.setAttribute('style','background:#ce466c;border:1px solid #ce466c;padding:5px;color:#ffffff;'), 1500);
+				colo = '';
+				chrome.storage.local.set({'statgraph':colo});
+				console.log('Clean');
+			});
+			mmmm.addEventListener("click", function(){//кнопка отображающая форму на экране
+				besos.style.display = 'block';
+				skut = sisi; bdsm = [];
+				for(ti=0; ti<skut.length; ti++){
+					ouch = skut[ti];
+					puni = ouch.name;
+					bdsm.push(puni);
+				}
+				domin = bdsm.filter((val, i, ar) => ar.indexOf(val) === i); //массив с уникальными именами
+				tag = domin.length;
+				console.log(tag);
+				graf_canva();
+				pafa = document.querySelector('#podva');
+				for(o=0; o<tag; o++){
+					kiar = domin[o];
+					pafa.insertAdjacentHTML("afterbegin", "<div><input type='radio' name='sotydk' value='"+kiar+"'>  "+kiar+"</div>");
+				}
+				
+				ssss.addEventListener("click", function(){
+				this.setAttribute('disabled','true');
+				this.setAttribute('style','background:#9ca0ce;border:1px solid #9ca0ce;padding:5px;color:#9a9a9a;margin-right:9px; color:#fff;');
+				setTimeout(() => this.removeAttribute('disabled'), 1500);
+				setTimeout(() => this.setAttribute('style','background:#7680f1;border:1px solid #7680f1;padding:5px;color:#ffffff;margin-right:9px;'), 1500); bodag = []; chi_c=[];
+				// Надо прописать Условие, если нажимаешь построить график при нулевых данных
+				dzidzi = document.querySelector('input[name="sotydk"]:checked').value;
+				for(f=0; f<sisi.length; f++){
+					pina = sisi[f];
+					if(pina.name == dzidzi){
+						bodag.push(Number(pina.time.substring(0,2)*60)+Number(pina.time.substring(3)));
+						chi_c.push(pina.time);
+					}
+				}
+				toples = document.querySelector('#toples').innerHTML = "<div id='promet' style='width: 30px;height:30px;box-shadow: 0 0 3px #9a9a9a;right:25px;top:25px;position:absolute;border-radius:45px;background-color: #fde74e;'><div style='margin:5px 10px;font-size:14pt;'>T</div></div>";
+				poopa = document.querySelector('#promet');
+				poopa.addEventListener("click", function(){
+					alert(chi_c);
+				});
+				
+				klep=[];pussi = 0;
+				for(v=0; v<bodag.length; v++){
+					jij = bodag[v];
+					ktiki = (bodag[v] - bodag[v+1]);
+					klep.push(ktiki);
+					if(Number(ktiki)){
+						pussi=pussi + ktiki;
+					}
+				}
+				ibis = (pussi/bodag.length).toFixed(2);
+				ponyad = document.querySelector('#ponyad');
+				pansi = document.querySelector('#nadval');
+				pansi.innerHTML = ibis+" min.";
+				if(bodag.length == 0 || bodag.length >= 5){ponyad.innerHTML = bodag.length+" - Накладных";}
+				if(bodag.length == 1){ponyad.innerHTML = bodag.length+" - Накладная";}
+				if(bodag.length > 1 && bodag.length < 5){ponyad.innerHTML = bodag.length+" - Накладные";}
+				graf_canva();
+				ctx.beginPath();
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = "#ce466c";
+				ctx.moveTo(20, 450);
+				for(df=0; df<klep.length; df++){
+					jioc = klep[df];
+					if(Number(jioc)){
+						ctx.lineTo(df*10+30, 450 - jioc*10);
+					}
+				}
+				ctx.stroke();
+				});
+			});			
+		
 		}
 		}
 	});
+	}
+	if(dult == 'https://my2.bookvoed.ru/shop/search/diffs'){//Для СРХшников
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+			if(maner == undefined){
+				console.log('Настройки пустые');
+			}else{
+			par = maner[11];
+			if(par == 1){
+				var gogo = document.querySelector('#form-from-input'), gege = document.querySelector('#form-to-input'), sklad = document.querySelector('#form-shop-input');
+				tData();
+				gogo.value = today, gege.value = today, sklad.value = 83;
+				binv = document.querySelector('#form-submit-input');
+				niuy = binv.parentElement;
+				niuy.insertAdjacentHTML("beforeEnd", "<input type='button' class='viexh' value='Проверка' style='background:#626262;border:1px solid #626262;color:rgb(255, 255, 255);'><input type='button' class='viekl' value='Очистить' style='background:#efefef;border:1px solid #626262;color:rgb(0, 0, 0);'>");
+				bunni = document.querySelector('.viexh'), viekl = document.querySelector('.viekl');
+				bunni.addEventListener("click", function(){ 
+					tabeh = document.querySelector('table').innerHTML; 
+			stoka = document.querySelectorAll('tr');
+			for (var i =0, pedos=stoka.length; i< pedos; i++){
+				koki = stoka[i];
+				koki.classList.add('str'+i);
+				stolt = koki.querySelectorAll('tr.str'+i+' th');
+					for (var k =0, letos=stolt.length; k< letos; k++){
+						loti = stolt[k];
+						loti.classList.add(i+'stb'+k);
+					}
+				stolb = koki.querySelectorAll('tr.str'+i+' td');
+					for (var j =0, ledos=stolb.length; j< ledos; j++){
+						loki = stolb[j];
+						loki.classList.add(i+'stb'+j);
+					}
+			}
+			
+				stoka = document.querySelectorAll('tr');
+			for (var i =0, pedos=stoka.length; i< pedos; i++){
+				koki = stoka[i];
+				stolt = koki.querySelectorAll('tr.str'+i+' th');
+					for (var k =0, letos=stolt.length; k< letos; k++){
+						loti = stolt[k];
+						lotas = loti.getAttribute('class');
+						if(lotas == i+'stb0'){loti.remove();
+						}if(lotas == i+'stb1'){loti.remove();
+						}if(lotas == i+'stb4'){loti.remove();
+						}if(lotas == i+'stb5'){loti.remove();
+						}if(lotas == i+'stb10'){loti.remove();
+						}if(lotas == i+'stb11'){loti.remove();
+						}if(lotas == i+'stb2'){bsz = loti.innerHTML;loti.remove();
+						}if(lotas == i+'stb8'){loti.insertAdjacentHTML("afterEnd", '<th>'+bsz+'</th>');
+						}if(lotas == i+'stb9'){
+							bju = loti.innerText;
+							if(bju != '1'){
+								if(bju != 'Кол-во брак'){
+								loti.parentElement.remove();
+								}
+							}
+						}
+					}
+				stolb = koki.querySelectorAll('tr.str'+i+' td');
+					for (var j =0, ledos=stolb.length; j< ledos; j++){
+						loki = stolb[j];
+						locas = loki.getAttribute('class');
+						if(locas == i+'stb0'){loki.remove();
+						}if(locas == i+'stb1'){loki.remove();
+						}if(locas == i+'stb4'){loki.remove();
+						}if(locas == i+'stb5'){loki.remove();
+						}if(locas == i+'stb10'){loki.remove();
+						}if(locas == i+'stb11'){loki.remove();
+						}if(locas == i+'stb2'){bsx = loki.innerHTML;loki.remove();
+						}if(locas == i+'stb8'){loki.insertAdjacentHTML("afterEnd", '<td>'+bsx+'</td>');
+						}if(locas == i+'stb9'){
+							bju = loki.innerText;
+							if(bju == '' || bju == '0'){
+								loki.parentElement.remove();
+							}
+						}
+					}
+			}
+			table = document.querySelector('table');
+			sortedRows = Array.from(table.rows).slice(1).sort((rowA,rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
+			table.tBodies[0].append(...sortedRows);
+			chrome.storage.sync.get(['srahar'], function(items){
+				var zilla = items.srahar;
+				if(zilla == undefined || zilla == ''){
+					alert('Список пуст');
+				}else{
+					//alert(zilla);
+					yrtyu = document.querySelectorAll("td");
+					for(var y = 0; y < yrtyu.length; y++){
+						dostro = yrtyu[y];
+						dedos = dostro.innerHTML;
+						for(var i = 0; i < zilla.length; i++){
+							ketr = zilla[i];
+							if(dedos == zilla[i]){
+								kani5 = dostro.parentElement;
+								kani5.setAttribute("style","background-color:#46e31f;");
+							}
+						}
+					}
+				}
+				});
+			});
+			viekl.addEventListener("click", function(){
+				chrome.storage.sync.get(['srahar'], function(items){
+				var pixxa = items.srahar;
+				if(pixxa == undefined || pixxa == ''){
+					alert('Список накладных уже чист');
+				}else{
+					cash = '';
+					chrome.storage.sync.set({'srahar':cash});
+					alert('Список накладных очищен');
+				}
+				});
+			});
+				}
+			}
+	});
+	}
+	/*if(biult == 'https://my2.bookvoed.ru/search?table%5Bforce%5D=1&results%5Btable%5D=2971&results%5Bsubs%5D%5B0%5D%5Blink%5D=4462&results%5Bsubs%5D%5B0%5D%5Btable%5D=1108&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B1%5D%5Bfield%5D=5354&results%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bfilters%5D%5B1%5D%5Bfield%5D=2977'){*/
+	if(biulc == 'https://my2.bookvoed.ru/search?table%5Bforce%5D=1&results%5Btable%5D=2971&results%5Bsubs%5D%5B0%5D%5Blink%5D=4462&results%5Bsubs%5D%5B0%5D%5Btable%5D=1108&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Blink%5D=1684&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Btable%5D=173&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bsubs%5D%5B0%5D%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B1%5D%5Bfield%5D=174&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bsubs%5D%5B0%5D%5Bfilters%5D%5B1%5D%5Bfield%5D=5354&results%5Bfilters%5D%5B0%5D%5Bfield%5D=0&results%5Bfilters%5D%5B1%5D%5Bfield%5D=2977'){
+	chrome.storage.sync.get(['setnag'], function(items){
+		var maner = items.setnag;
+			if(maner == undefined){
+				console.log('Настройки пустые');
+			}else{
+			par = maner[11];
+			if(par == 1){
+			mazad = [];
+			var ount = document.querySelector("#content");
+			document.querySelector("#bar").setAttribute('style','display:none;');
+			ount.insertAdjacentHTML("beforebegin", "<div><input id='sypnym' type='text' maxlength='12' style='height:22px;border-radius:3px;border-color:#1684e3;border:2px solid #1684e3;background-color:#efefef;'><input id='trah' type='button' value='+ Добавить' style='background:#1684e3;border:1px solid #1684e3;color:rgb(255, 255, 255);padding:5px 29px;margin:0px 10px;border-radius:3px;font-weight:600;'><input id='posos' type='button' value='Сохранить' style='background:#cd0e66;border:1px solid #cd0e66;color:rgb(255, 255, 255);padding:5px 29px;margin:0px 10px;border-radius:3px;font-weight:600;'><a href='https://my2.bookvoed.ru/shop/search/diffs' style='background:#282828;border:1px solid #282828;color:rgb(255, 255, 255);padding:5px 29px;margin:0px 10px;border-radius:3px;font-weight:600;cursor:pointer;'>Проверка</a></div>");
+			trah = document.querySelector("#trah"), posos = document.querySelector("#posos");
+			suuk = document.querySelector("#sypnym");
+			muuk = document.querySelector("#bar input");
+			suuk.focus();
+			suuk.addEventListener("change", function(){
+				bafas = suuk.value;
+				badas = bafas.substring(5,11);
+				muuk.value = badas;
+				muuk.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+				trah.removeAttribute('disabled');
+			});
+			trah.addEventListener("click", function(){
+					rekre = document.querySelector("#results");
+					rexre = rekre.querySelector("table");
+					pariu = rexre.querySelector("td:nth-child(6)").innerText;
+					trah.setAttribute('disabled','true');					
+					if(pariu == 'Склад хранения'){
+						alert("ВНИМАНИЕ! Данный акт - Не является актом СРХ!");
+					}else{
+						balls = rexre.querySelector("td:nth-child(3)").innerText; 
+						mazad.push(balls);
+					}
+					suuk.value = '';
+					suuk.focus();
+					
+			});
+			posos.addEventListener("click", function(){
+				zazad = [...new Set(mazad)];
+				console.log(zazad);
+				chrome.storage.sync.set({'srahar':zazad});
+			});
+			}
+			}
+	});
+	}
+	
+	
+	
+	function in_memory(){
+		chrome.storage.local.get(['statgraph'], function(items){
+		vaner = items.statgraph;
+		if(Array.isArray(vaner)){
+			console.log('Массив существует');
+			sisi=vaner;
+			console.log(sisi);
+		}else{
+			console.log('Массив не существует');
+			vaner = [];
+			sisi=vaner;
+			console.log(sisi);
+		}
+		});
+	}
+	function graf_canva(){
+		canvas = document.querySelector('#lyapitu');
+				ctx = canvas.getContext('2d');
+				canvas.width  = 860;
+				canvas.height = 470;	
+				for(var xi = 10; xi <= canvas.width; xi+=10){
+					ctx.beginPath();
+					ctx.lineWidth = 0.5;
+					ctx.strokeStyle = "#e0e0e0";
+					ctx.moveTo(xi+20, 0);
+					ctx.lineTo(xi+20, canvas.height-20);
+					ctx.closePath();
+					ctx.stroke();
+				}
+				for(var ji = 10; ji < canvas.height-20; ji+=10){
+					ctx.beginPath();
+					ctx.lineWidth = 0.5;
+					ctx.strokeStyle = "#e0e0e0";
+					ctx.moveTo(20, ji);
+					ctx.lineTo(canvas.width, ji);
+					ctx.closePath();
+					ctx.stroke();
+				}
+				chip = ["45", "40", "35", "30", "25", "20", "15", "10", "5", "0"];
+				for(i = 0; i <10; i++) { 
+					ctx.beginPath();
+					ctx.fillText(chip[i], 0, i * 50+5); 
+					ctx.moveTo(15, i * 50); 
+					ctx.lineTo(20, i * 50); 
+					ctx.closePath();
+					ctx.stroke();
+				}
+				labels = ["Мин/Накл.", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100"];
+				for(var i=0; i<20; i++) {
+					ctx.beginPath();
+					ctx.fillText(labels[i], i*50+15, canvas.height);
+					ctx.moveTo(i*50+20, canvas.height-10); 
+					ctx.lineTo(i*50+20, canvas.height-20); 
+					ctx.closePath();
+					ctx.stroke();
+				}
+				for(var mi = 50; mi <= canvas.width; mi+=50){
+					ctx.beginPath();
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = "949494";
+					ctx.moveTo(mi+20, 0);
+					ctx.lineTo(mi+20, canvas.height-20);
+					ctx.fill();
+					ctx.closePath();
+					ctx.stroke();
+				}
+				for(var ni = 50; ni < canvas.height-20; ni+=50){
+					ctx.beginPath();
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = "949494";
+					ctx.moveTo(20, ni);
+					ctx.lineTo(canvas.width, ni);
+					ctx.fill();
+					ctx.closePath();
+					ctx.stroke();
+				}
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = "#9e9e9e";
+				ctx.beginPath();
+				ctx.moveTo(20, 0);
+				ctx.lineTo(20, canvas.height-20);
+				ctx.lineTo(canvas.width, canvas.height-20);
+				ctx.stroke();
 	}
 	
 	function download(data, filename, type){
@@ -474,37 +1171,40 @@ if(document.readyState === 'complete'){
 	
 	function tData(){
 		data = new Date();
-		var dd = data.getDate()-1, mm = data.getMonth()+1, yy = data.getFullYear(), fdd = data.getDate(), did = data.getDay();
+		var dd = data.getDate()-1, mm = data.getMonth()+1, yy = data.getFullYear(), did = data.getDate();
 		var days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+		if(mm<10){mm='0'+mm;}
+		if(did<10){did='0'+did;}
+		foday = did+'.'+mm+'.'+yy;
+		goday = yy+'.'+mm+'.'+did;
+		gaday = did;
+		bijan = dd+1;
+		
 		if(dd<1){
-			mm = mm-1;
-			m4et = [2,4,6,9,11,], mne4et = [1,3,5,7,8,10,12], mday = [31,28,31,30,31,30,31,31,30,31,30,31];
-			dds = mday[mm];
-			console.log('Error!');
+				//	12  1  2  3  4  5  6  7  8  9 10 11	
+			mday = [31,31,28,31,30,31,30,31,31,30,31,30];//дек в начале, потому что отсчет идет от 0, а не 1
+			hm = mm-1;
+			dds = mday[hm];//кол-во дней в предыдущем месяце
+			dd = dds; //задаем день исходя из месяца
+			if(hm < 1){mm = 12;yy = yy - 1;}else{mm = hm;}
 		}else{
 			if(dd<10){dd='0'+dd;}
-			if(fdd<10){fdd='0'+fdd;}
 		}
-		if(mm<10){mm='0'+mm;}
+		giday = yy+'.'+mm+'.'+dd;
 		today = dd+'.'+mm+'.'+yy;
-		foday = fdd+'.'+mm+'.'+yy;
-		goday = yy+'.'+mm+'.'+fdd;
-		gaday = did;
 	}
 	async function elemUpdate(selector){
 		try{
 			var html = await(await fetch(location.href)).text();
 			var newdoc = new DOMParser().parseFromString(html, 'text/html');
 			document.querySelector(selector).outerHTML = newdoc.querySelector(selector).outerHTML;
-			console.log('Element'+selector+'updated successful');
+			//console.log('Element'+selector+'updated successful');
 			return true;
 		}catch(err){
-			console.log('Element'+selector+'NOT updated successful');
+			//console.log('Element'+selector+'NOT updated successful');
 			console.log(err);
 			return false;
 		}
 	}
 }
 }
-
-
