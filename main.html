@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
 	<script type="text/javascript" src="/popup.js"></script>
@@ -7,17 +7,23 @@
 	<body>
 		<div>
 			<div id='gpg'>
+				<div class='mji'>
 				<img class='log' src='/ico/3xx.png'>
+				</div>
 			</div>
 		</div>
 		<div id='git'>
 			<div id='versi'>
-				<span>Версия: 6.4.2</span>
+				<span>Версия: 6.6.0</span>
+			</div>
+			<div id='vertu'>
+				<span></span>
 			</div>
 		</div>
 		<div>
-			<div class='bio'><button class='bint1 active'>Настройка</button></div>
-			<div class='bio'><button class='bint2'>Поддержка</button></div>
+			<div class='bio'><button class='bint1 active'>Общие</button></div>
+			<div class='bio'><button class='bint2'>Больше</button></div>
+			<div class='bio'><button class='bint3'>Помощь</button></div>
 		</div>
 		<div class='dot1 active'>
 			<div>
@@ -33,56 +39,70 @@
 			<div class='bio3'><span class='sl_text tsbot'>СБОРКА:</span><span> Таймер Автообновления данных</span></div>
 			</div>
 			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par3'><span class='slider round odot'></span></label></div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par3'><span class='slider round otgt'></span></label></div>
+			<div class='bio3'><span class='sl_text totgt'>ОТГРУЗКА:</span><span> Контроль заказов Маг</span></div>
+			</div>
+			<div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par4'><span class='slider round otgt'></span></label></div>
+			<div class='bio3'><span class='sl_text totgt'>ОТГРУЗКА:</span><span> Контроль заказов Рег</span></div>
+			</div>
+			<div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par5'><span class='slider round rakt'></span></label></div>
+			<div class='bio3'><span class='sl_text trakt'>ТЕХ.УР:</span><span> URL заказов в накладной</span></div>
+			</div>
+		</div>
+		<div class='dot2 deactive'>
+			<div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par6'><span class='slider round odot'></span></label></div>
 			<div class='bio3'><span class='sl_text todot'>ОДО:</span><span> Обработка отказов</span></div>
 			</div>
 			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par4'><span class='slider round odot'></span></label></div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par7'><span class='slider round odot'></span></label></div>
 			<div class='bio3'><span class='sl_text todot'>ОДО:</span><span> Упрощение создания актов ИМ/СРХ</span></div>
 			</div>
 			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par5'><span class='slider round odot'></span></label></div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par8'><span class='slider round odot'></span></label></div>
 			<div class='bio3'><span class='sl_text todot'>ОДО:</span><span> Авто единички Т8</span></div>
 			</div>
 			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par6'><span class='slider round otgt'></span></label></div>
-			<div class='bio3'><span class='sl_text totgt'>ОТГРУЗКА:</span><span> Подсчет заказов СПБ/Регионы к отправке</span></div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par9'><span class='slider round odot'></span></label></div>
+			<div class='bio3'><span class='sl_text todot'>ОДО:</span><span> Обработка СХ / СРХ</span></div>
+			</div>
+			
+			<div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par10'><span class='slider round rakt'></span></label></div>
+			<div class='bio3'><span class='sl_text trakt'>ТЕХ.УР:</span><span> Отрисовка статы отгрузки</span></div>
 			</div>
 			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par7'><span class='slider round otgt'></span></label></div>
-			<div class='bio3'><span class='sl_text totgt'>ОТГРУЗКА:</span><span> Упрощение отгрузки EMS</span></div>
+			<div class='bio2'><label class='switch'><input type='checkbox' id='par11'><span class='slider round srht'></span></label></div>
+			<div class='bio3'><span class='sl_text tsrht'>СРХ:</span><span> Приемка актов ИМ</span></div>
 			</div>
-			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par8'><span class='slider round otgt'></span></label></div>
-			<div class='bio3'><span class='sl_text totgt'>ОТГРУЗКА:</span><span> Ссылки на заказы при печати накладной маршрута</span></div>
-			</div>
-			<div>
-			<div class='bio2'><label class='switch'><input type='checkbox' id='par9'><span class='slider round rakt'></span></label></div>
-			<div class='bio3'><span class='sl_text trakt'>ТРЭК:</span><span> Быстрый переход после подтверждения заказа IML</span></div>
-			</div>
-			<input id='setnas' type='button' value='Применить'>
 		</div>
-		<div class='dot2 deactive'>
+		<div class='dot3 deactive'>
 			<div>
 			<div>
 				<div>Причины не/некорректной работы приложения:</div>
 				<div>
 				<ul>
 				<li>Выключен нужный вам тумблер. Если он активен или не включается, то обратитесь ко мне</li>
-				<li>Если вы ОДО, то учитывайте, что скрипт некорректно работает с 1 числом каждого месяца</li>
-				<li>Если вы Отгрузка, и у вас омтечает неверные ЕМС магазины, то обратитесь ко мне. Скрипт нужно обновить</li>
+				<li>Некоторые функции могут не работать, в браузере Chrome ниже 89 версии</li>
+				<li>ОДО - обращайте внимание на 1 число каждого месяца, скрипт может некорректно проставлять дату</li>
+				<li>Функция СРХ, конфликтует с созданием актов для СРХ и обработкой СХ/СРХ. Не включать вместе.</li>
 				<ul>
 				</div>
 			</div>
 			<br>
-			<span>По остальным вопросам работы приложения, багам и недочетам замечанным при работе, просьба</span>
+			<span>По вопросам/предложениям работы приложения, багам и недочетам замечанным при работе, просьба</span>
 			</div>
 			<div>
 			<span> обращаться на почту - <a href='mailto:Terekhin.O@bookvoed.ru'><span style='color:blue'>Terekhin.O@bookvoed.ru</span></a></span>
 			</div>
 		</div>
+		<div>
+			<input id='setnas' type='button' value='Применить'>
+		</div>
 		<div style='font-size:14px;color:#828282;padding:10px 16px;'>
-			<span> © Terekhin.O</span>
+			<span> © Author</span>
 		</div>
 	</body>
 </html>
