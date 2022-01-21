@@ -1,7 +1,7 @@
 {
-	"name": "Buka Bot",
-	"version": "6.4.2",
-	"description": "Многофункциональное приложение.",
+	"name": "Тянка Bot",
+	"version": "6.6.0",
+	"description": "Многофункциональное приложение. Предназначено для упращения процессов работы отдельных подразделений склада Интернет - Логистика.",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"update_url": "http://myurl/plugin/updates.xml",
 	"content_scripts": [ {
@@ -13,7 +13,7 @@
    "browser_action": {
 		"default_popup": "main.html",
 		"matches": ["*://my2.bookvoed.ru/*"],
-		"default_title": "Exten$ion",
+		"default_title": "Тянка Бот",
 		"default_icon": {
 			"16": "ico/App_16.png",
 			"32": "ico/App_32.png",
