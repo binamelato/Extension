@@ -1,6 +1,6 @@
 {
 	"name": "Тянка Bot",
-	"version": "6.6.0",
+	"version": "6.6.2",
 	"description": "Многофункциональное приложение. Предназначено для упращения процессов работы отдельных подразделений склада Интернет - Логистика.",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"update_url": "http://myurl/plugin/updates.xml",
@@ -10,7 +10,7 @@
 		"all_frames": true,
 		"js": [ "contentscript.js" ]
    }],
-   "browser_action": {
+   "action": {
 		"default_popup": "main.html",
 		"matches": ["*://my2.bookvoed.ru/*"],
 		"default_title": "Тянка Бот",
@@ -27,5 +27,5 @@
 			"48": "ico/App_48.png",
 			"128": "ico/App_128.png"
 		},
-   "manifest_version": 2
+   "manifest_version": 3
 }

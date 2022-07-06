@@ -1,6 +1,14 @@
-document.onreadystatechange = function(){
+﻿document.onreadystatechange = function(){
 if(document.readyState === 'complete'){
 	var urlt = document.location.href, cult = urlt.substring(0,54), bult = urlt.substring(0,51), dult = urlt.substring(0,41), lult = urlt.substring(0,23), flt = urlt.substring(0,69), piolt = urlt.substring(0,63), wiol = urlt.substring(0,78), himp = urlt.substring(0,62), biult = urlt.substring(0,358), biulc = urlt.substring(0,624), ymis = urlt.substring(0,60);
+	///====== IDEAL ===== ///
+	/*
+	функция общая
+	1. передаем в функцию: ссылку, название хранилища функций, параметр функции,
+	внутри основной функции срабатывает функция "сделать"
+	2. передаем параметр функции и состояние функции
+	*/
+	///====== IDEAL ===== ///
 /*
 	//if(lult == 'https://my2.bookvoed.ru'){// Добавление ссылок на реестры в шапку
 	if(ymis == 'https://my2.bookvoed.ru/shop/logist/receive/storage?sending='){// Простава для приемки всех позиций в плюс (Приемщики)

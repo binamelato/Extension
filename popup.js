@@ -1,6 +1,7 @@
 document.onreadystatechange = function(){
 	if(document.readyState === 'complete'){
 		vkl1 = document.querySelector(".bint1"), vkl2 = document.querySelector(".bint2"), vkl3 = document.querySelector(".bint3"), dot1 = document.querySelector(".dot1"), dot2 = document.querySelector(".dot2"), dot3 = document.querySelector(".dot3"), setnas = document.querySelector("#setnas");
+		pi7 = document.querySelector("#par7"),pi9 = document.querySelector("#par9"),pi11 = document.querySelector("#par11");
 		
 		chrome.storage.sync.get(['setnag'], function(items){
 			if(items.setnag == undefined || items == ''){
@@ -15,6 +16,13 @@ document.onreadystatechange = function(){
 					}else{
 						urlx.checked = false;
 					}
+				}
+				if(pi7.checked || pi9.checked){
+					pi11.setAttribute('disabled', 'true');
+				}
+				if(pi11.checked){
+					pi7.setAttribute('disabled', 'true');
+					pi9.setAttribute('disabled', 'true');
 				}
 			}
 		});
@@ -34,6 +42,34 @@ document.onreadystatechange = function(){
 			chrome.storage.sync.set({'setnag':koss});//Записываем в хранилище
 			//console.log(koss);
 			chrome.tabs.reload();
+		});
+		pi11.addEventListener("change", function(){
+			if(pi11.checked){
+				pi7.setAttribute('disabled', 'true');
+				pi9.setAttribute('disabled', 'true');
+			}else{
+				pi7.removeAttribute('disabled');
+				pi9.removeAttribute('disabled');
+			}
+			
+		});
+		pi7.addEventListener("change", function(){
+			if(pi7.checked){
+				pi11.setAttribute('disabled', 'true');
+			}else{
+				if(!pi9.checked){
+					pi11.removeAttribute('disabled');
+				}
+			}	
+		});
+		pi9.addEventListener("change", function(){
+			if(pi9.checked){
+				pi11.setAttribute('disabled', 'true');
+			}else{
+				if(!pi7.checked){
+					pi11.removeAttribute('disabled');
+				}
+			}			
 		});
 		vkl1.addEventListener("click", function(){
 			vkl1.classList.add('active');

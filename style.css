@@ -1,5 +1,6 @@
 body{width:300px;padding:0px;margin:0px;font-family:"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;}
 ul{padding-inline-start:15px;}
+/*@media print{ -webkit-print-color-adjust: exact; } //показывает при печати исходное форматирование */
 img.log{height:80px;vertical-align:top;}
 .dot1, .dot2, .dot3{padding:10px 10px;color:#7b7b7b;text-shadow:0 0 #8a8a8a;}
 #versi{font-size:20px;text-align:center;color:#505050;}
