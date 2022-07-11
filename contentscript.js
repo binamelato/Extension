@@ -43,6 +43,19 @@ if(document.readyState === 'complete'){
 		}
 	});
 	}*/
+	if(cult == 'https://my2.bookvoed.ru/shop/delivery/order/giveout?or'){
+		bas = document.querySelector("#form-date-input");
+		tData();
+		bas.value = foday;
+		console.log(bas);
+		bader = document.querySelectorAll("input[id$='_confirm']");
+		if(bader){
+			for (var i =0, dodge=bader.length; i< dodge; i++){
+				sosogin = bader[i];
+				sosogin.checked = true;
+			}
+		}
+	}
 	if(dult == 'https://my2.bookvoed.ru/shop/logist/recei'){
 	chrome.storage.sync.get(['setnag'], function(items){
 		var maner = items.setnag;
